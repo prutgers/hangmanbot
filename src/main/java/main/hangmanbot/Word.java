@@ -9,7 +9,7 @@ package main.hangmanbot;
  *
  * @author Peter
  */
-public class Word {
+public final class Word {
     private final String toGuess;
     private String guessedBot = "";
     private String guessed = "";
@@ -19,8 +19,13 @@ public class Word {
         
         //dit is nu nog standaard maar moet straks uit een document komen
         toGuess = "fiets";
-        countGuessed();
+       countGuessed(toGuess);
     }    
+    
+    public Word(String word){
+        this.toGuess = word;
+        countGuessed(word);
+    }
     
     public int getWrongGuess(){
         return this.wrongGuess;
@@ -32,7 +37,7 @@ public class Word {
         
     
     //volgens mij kan deze ook wel private
-    public void countGuessed(){
+    public void countGuessed(String toGuess){
         for(int i=0 ; i < toGuess.length() ;i++){
             this.guessed = this.guessed + "* ";
             this.guessedBot = this.guessedBot + "*";
