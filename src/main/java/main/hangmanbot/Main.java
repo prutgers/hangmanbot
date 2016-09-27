@@ -12,18 +12,15 @@ import org.jibble.pircbot.IrcException;
  *
  * @author Peter
  */
-public class Main {
-    //settings
-    private final static String connectToChannel = "#rsvier";
-    private final static String connectToServer ="irc.xs4all.nl";
-    
+public class Main implements ServerSettings{
+    protected static GalgjeBot bot;
     public static void main(String[] args){   
-       GalgjeBot bot = new GalgjeBot();
+       bot = new GalgjeBot();
        try{
-        bot.connect(connectToServer);
+        bot.connect(server);
         } catch (IOException | IrcException e) {
             System.out.println("help het gaat mis");
         }
-        bot.joinChannel(connectToChannel);
+        bot.joinChannel(channel);
     }
 }

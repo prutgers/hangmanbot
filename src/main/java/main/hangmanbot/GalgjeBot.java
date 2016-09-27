@@ -15,26 +15,21 @@ import org.jibble.pircbot.User;
  * @author Peter
  */
 public class GalgjeBot extends PircBot {
-    private Word currentWord;
-    private boolean onGoingGame = false;
-    private String player;
-    private static String connectToChannel = "#rsvier";
-            
     public GalgjeBot(){
         this.setName("GalgjeBot");
     }
     
     @Override
     public void onMessage(String channel, String sender, String login, String hostname, String message){
-        //!start
-        
-        
-        //!start [woord] [nickname]
-        
-        
-        //!raad [letter]/[woord]
-        
-        
+        //Kijk of de message start met een ! anders hoeft de bot niks te doen
+        if(message.startsWith("!")){
+            if(message.startsWith("!raad")){
+                //doe raad functie
+                GameManager.makeAGuess(message, sender);
+            } else if(message.startsWith("!start")){
+                GameManager.startGame(message, sender);
+            }
+        }
     }
     
     
