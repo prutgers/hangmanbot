@@ -9,18 +9,23 @@ package main.hangmanbot;
  *
  * @author Peter
  */
-public class HangmanPrinter {
+public class HangmanPrinter implements ServerSettings{
     
-   public String checkLoss(Word word){
-        String lost = "";
-        if(word.getWrongGuess()<10){
-            lost = "Je hebt nog " + (10-word.getWrongGuess()) + " pogingen over.";
-                    
-        }
-        else {
-            lost = "Je hebt verloren";
-        }
-        
-        return lost;
+    
+    
+    private HangmanPrinter(){
+       
+    }
+    
+    public static void printHangman(int wrongGuesses){
+    String[] hangmanBelow5 = new String[]{
+        "   _______\n" +
+"     |/      |\n" +
+"     |      (_)\n" +
+"     |      \\|/\n" +
+"     |       |\n" +
+"     |      / \\\n" +
+"     |\n" +
+" ____|___"
     }
 }

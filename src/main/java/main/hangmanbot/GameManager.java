@@ -74,13 +74,14 @@ public class GameManager implements ServerSettings {
       //More game modus should be implemented here for example !start [2] shoudl be a 2 player game
     }
     
+    
+    //Search if a player who is trying to guess a letter/word is actually an active player in a game
     private static Game findGameWithPlayer(String player){
         Game findGame = null;
         for(Game game:gameSet){
             if(player.equalsIgnoreCase(game.getCurrentPlayer())){
                 findGame = game;
             }
-        
         }
         return findGame;
     }
