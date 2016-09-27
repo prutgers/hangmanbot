@@ -5,10 +5,7 @@
  */
 package main.hangmanbot;
 
-import java.io.IOException;
-import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.PircBot;
-import org.jibble.pircbot.User;
 
 /**
  *
@@ -23,10 +20,12 @@ public class GalgjeBot extends PircBot {
     public void onMessage(String channel, String sender, String login, String hostname, String message){
         //Kijk of de message start met een ! anders hoeft de bot niks te doen
         if(message.startsWith("!")){
+            System.out.println("ben in onMessage");
             if(message.startsWith("!raad")){
                 //doe raad functie
                 GameManager.makeAGuess(message, sender);
             } else if(message.startsWith("!start")){
+                System.out.println("wordt nu naar de gameages gestuurd");
                 GameManager.startGame(message, sender);
             }
         }
@@ -114,20 +113,7 @@ public class GalgjeBot extends PircBot {
     }
     */
         
-        public String checkLoss(){
-            String lost;
-            if(currentWord.getWrongGuess()<10){
-                lost = "Je hebt nog " + (10-currentWord.getWrongGuess()) + " pogingen over.";
-
-            }
-            else {
-                lost = player + " je hebt het spel verloren!";
-                onGoingGame = false;
-            }
-
-            return lost;
-        }
-
+       
         
 
 

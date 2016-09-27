@@ -5,6 +5,7 @@
  */
 package main.hangmanbot;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,7 +19,7 @@ public class GameManager implements ServerSettings {
     
     
     private GameManager(){
-        
+        this.gameSet = new HashSet<Game>();
     }
     
     static void makeAGuess(String message, String sender) {
@@ -38,21 +39,31 @@ public class GameManager implements ServerSettings {
     
     public static void startGame(String message, String sender){
       String[] splitMessage = message.split(" ");
-      
+        System.out.println("ben hier");
+              
       //Check if it is just the !start command and if so start a game with 1 player
       if(splitMessage.length == 1){
-          gameSet.add(new Game(0, sender));
+          System.out.println("ben hier nu");
+        Game game = new Game(0, sender);
+          System.out.println(game);
+          System.out.println(gameSet.add(game));
+          System.out.println("en nu hier");
+        Main.bot.sendMessage(channel, "Galgje is gestart hier onder staat het woord");
+        Main.bot.sendMessage(channel, game.getCurrentWord().getGuessed());
+        Main.bot.sendMessage(channel, sender + " het is jou beurt gok een letter of een woord.");
           
       }
     }
     
     private Game findGameWithPlayer(String player){
+        Game findGame = null;
         for(Game game:gameSet){
-            if(player.equalsIgnoreCase(game.g))
+            if(player.equalsIgnoreCase(game.getCurrentPlayer())){
+                findGame = game;
+            }
         
         }
-        
-        return 
+        return findGame;
     }
     
     

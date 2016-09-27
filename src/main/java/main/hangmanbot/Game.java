@@ -11,16 +11,16 @@ package main.hangmanbot;
  */
 public class Game {
     
-    private Word currentWord;
-    private int difficulty;
-    private String[] playerNames;
+    private final Word currentWord;
+    private final int difficulty;
+    private final String[] playerNames;
     private String currentPlayer;
     
     
     public Game(String word, int difficulty, String[] playerNames ){
         this.difficulty = difficulty;
         this.playerNames = playerNames;
-        this.currentPlayer = 0;
+        this.currentPlayer = playerNames[0];
         if(word.equalsIgnoreCase("default")){
             currentWord = new Word();
         } else {
@@ -35,15 +35,41 @@ public class Game {
         this.currentWord = new Word();
         
     }
+
+    /**
+     * @return the currentWord
+     */
+    public Word getCurrentWord() {
+        return currentWord;
     }
+
+    /**
+     * @return the difficulty
+     */
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * @return the playerNames
+     */
+    public String[] getPlayerNames() {
+        return playerNames;
+    }
+
+    /**
+     * @return the currentPlayer
+     */
+    public String getCurrentPlayer() {
+        return currentPlayer;
+    }
+}
     
     //controleren of het spel is gewonnen of verloren
     
     //zet de juiste speler aan de beurt
     
     
-    public boolean letterZitErin(Character guess){
-        return currentWord.checkGuess(guess);
-    }
     
-}
+    
+
