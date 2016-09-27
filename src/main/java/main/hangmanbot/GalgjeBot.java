@@ -20,23 +20,25 @@ public class GalgjeBot extends PircBot {
     private String player;
     private static String connectToChannel = "#rsvier";
             
-    public static void main(String[] args){   
-        GalgjeBot bot = new GalgjeBot();
-       
-        
-       try{
-        bot.connect("irc.xs4all.nl");
-        } catch (IOException | IrcException e) {
-            System.out.println("help het gaat mis");
-        }
-        bot.joinChannel(connectToChannel);
-        
-    }
-    
     public GalgjeBot(){
         this.setName("GalgjeBot");
     }
     
+    @Override
+    public void onMessage(String channel, String sender, String login, String hostname, String message){
+        //!start
+        
+        
+        //!start [woord] [nickname]
+        
+        
+        //!raad [letter]/[woord]
+        
+        
+    }
+    
+    
+    /**
     @Override
     public void onMessage(String channel, String sender, String login, String hostname, String message) {
         String[] splitMessage = message.split(" ");
@@ -104,8 +106,18 @@ public class GalgjeBot extends PircBot {
                 sendMessage(channel, " De opgegeven gebruiker is niet gevonden. Is de naam wel goed geschreven?");
             }
         }
+        
+        if(message.equalsIgnoreCase("!begin")){
+            String[] playerNames = new String[1];
+            playerNames[0] = sender;
+            GameManager.addGame("default", 0, playerNames);
+        }
+        
+        
+        
+        
     }
-    
+    */
         
         public String checkLoss(){
             String lost;

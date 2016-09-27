@@ -5,6 +5,8 @@
  */
 package main.hangmanbot;
 
+import java.util.List;
+
 /**
  *
  * @author Peter
@@ -14,12 +16,12 @@ public final class Word {
     private String guessedBot = "";
     private String guessed = "";
     private int wrongGuess = 0;
+    private List<Character> guessedLetters;
     
     public Word(){
-        
         //dit is nu nog standaard maar moet straks uit een document komen
         toGuess = "fiets";
-       countGuessed(toGuess);
+        countGuessed(toGuess);
     }    
     
     public Word(String word){
@@ -34,10 +36,14 @@ public final class Word {
     public String getGuessed(){
         return this.guessed;
     }
+    
+    public List<Character> getGuessedLetters(){
+        return guessedLetters;
+    }
         
     
     //volgens mij kan deze ook wel private
-    public void countGuessed(String toGuess){
+    private void countGuessed(String toGuess){
         for(int i=0 ; i < toGuess.length() ;i++){
             this.guessed = this.guessed + "* ";
             this.guessedBot = this.guessedBot + "*";
@@ -56,8 +62,10 @@ public final class Word {
         return goodGuess;
     }
     
+    //Checks if a guessed character is in the word.
     public boolean checkGuess(char guess){
         boolean goodGuess = false;
+        guessedLetters.add(guess);
         for(int i = 0; i < toGuess.length();i++){
             if(guess == toGuess.charAt(i)){
                 goodGuess = true;
@@ -83,7 +91,7 @@ public final class Word {
         formatGuessedBot(newGuess);
     }
 
-    public void formatGuessedBot(String guess){
+    private void formatGuessedBot(String guess){
         String guessed = "";
         for(int i =0;i<guess.length();i++){
             if(i == 0){
