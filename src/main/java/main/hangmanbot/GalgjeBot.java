@@ -20,7 +20,7 @@ public class GalgjeBot extends PircBot {
     public void onMessage(String channel, String sender, String login, String hostname, String message){
         //Kijk of de message start met een ! anders hoeft de bot niks te doen
         if(message.startsWith("!")){
-            System.out.println("ben in onMessage");
+            
             if(message.startsWith("!raad")){
                 //doe raad functie
                 GameManager.makeAGuess(message, sender);

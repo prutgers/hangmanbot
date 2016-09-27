@@ -5,7 +5,9 @@
  */
 package main.hangmanbot;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -16,11 +18,11 @@ public final class Word {
     private String guessedBot = "";
     private String guessed = "";
     private int wrongGuess = 0;
-    private List<Character> guessedLetters;
+    private Set<Character> guessedLetters = new HashSet<Character>();
     
     public Word(){
         //dit is nu nog standaard maar moet straks uit een document komen
-        toGuess = "fiets";
+        toGuess = "aandeel";
         countGuessed(toGuess);
     }    
     
@@ -37,7 +39,7 @@ public final class Word {
         return this.guessed;
     }
     
-    public List<Character> getGuessedLetters(){
+    public Set<Character> getGuessedLetters(){
         return guessedLetters;
     }
         

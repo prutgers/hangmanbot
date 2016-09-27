@@ -35,6 +35,21 @@ public class Game {
         this.currentWord = new Word();
         
     }
+    
+    public int numberOfTurnsLeft(){
+        //implement number of misses depending on game difficulty
+        
+        return 10 - currentWord.getWrongGuess();
+    }
+    
+    public boolean gameLost(){
+        //implement numbers of misses depeding on game difficulty
+        boolean gameLost = false;
+        if(10-currentWord.getWrongGuess()<= 0){
+            gameLost = true;
+        }
+        return gameLost;
+    }
 
     /**
      * @return the currentWord
