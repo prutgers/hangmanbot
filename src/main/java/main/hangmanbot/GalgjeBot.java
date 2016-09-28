@@ -29,6 +29,8 @@ public class GalgjeBot extends PircBot {
                 GameManager.startGame(message, sender);
             } else if(message.startsWith("!help")){
                 sendMessage(sender, "Ik ondersteun de volgende commando's [!start] om een spel galgje te starten, [!raad [letter of woord]] om een letter of woord te raden");
+            } else if(message.startsWith("!doemee")){
+              GameManager.joinAGame(message, sender);
             } else if(message.startsWith("!reset")){
                 GameManager.resetAllGames();
             } else {
