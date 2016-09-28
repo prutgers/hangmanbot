@@ -18,7 +18,7 @@ public class GalgjeBot extends PircBot {
     
     @Override
     public void onMessage(String channel, String sender, String login, String hostname, String message){
-        //For speed an processor control check if a message starts with a ! otherwise ignore the message
+        //For speed and processor control checks if a message starts with a ! otherwise ignore the message
         if(message.startsWith("!")){
             
             if(message.startsWith("!raad")){
@@ -29,6 +29,8 @@ public class GalgjeBot extends PircBot {
                 GameManager.startGame(message, sender);
             } else if(message.startsWith("!help")){
                 sendMessage(sender, "Ik ondersteun de volgende commando's [!start] om een spel galgje te starten, [!raad [letter of woord]] om een letter of woord te raden");
+            } else if(message.startsWith("!reset")){
+                GameManager.resetAllGames();
             } else {
                 //leeg
             }
@@ -41,36 +43,3 @@ public class GalgjeBot extends PircBot {
     }
     
 }
-  
-    
-    
-
-    //oude code moet nog verwijdered worden
-        /**
-        * if (message.equalsIgnoreCase("time")) {
-            String time = new java.util.Date().toString();
-            sendMessage(channel, sender + ": The time is now " + time);
-        }
-        if (message.equalsIgnoreCase("!help")) {
-            
-            sendMessage(channel, "!help !galgje !bo");
-        }
-        if (message.equalsIgnoreCase("!bo")) {
-            
-            sendMessage(channel, "Bo wat gezellig dat je er bent!");
-        }
-        if (message.equalsIgnoreCase("!galgje")) {
-            
-                                sendMessage(channel, "      _______\n") ;
-            sendMessage(channel,                    "     |/      |\n" );
-            sendMessage(channel,                    "     |      (_)\n" );
-                    sendMessage(channel,              "     |      \\|/\n" );
-                                sendMessage(channel, "     |       |\n" );
-                                sendMessage(channel, "     |      / \\\n" );
-                                sendMessage(channel, "     |\n" );
-                                sendMessage(channel, " ____|____");
-        }
-        * */
-     
-    
-

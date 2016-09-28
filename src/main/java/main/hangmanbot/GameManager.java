@@ -22,38 +22,57 @@ public class GameManager implements ServerSettings {
         
     }
     
+    //This huge method check if a guess either a word or a letter is correct and it does a lot more
+    //It would be good to split this up but thats for the next person :D
     static void makeAGuess(String message, String sender) {
-        //kijk door de gameSets en vind game met Speler naam
+        //Scroll trhough the onGoing games to check if the sender is in a a game and if it is his turn.
         Game game = findGameWithPlayer(sender);
         String[] splitMessage = message.split(" ");
         if(!(game == null)){
             Word currentWord = game.getCurrentWord();
+            //check if there is actually something else then [!raad] in the message
             if(splitMessage.length >= 2){
+                //Check if the guess is a single character or a word
                 if(splitMessage[1].length() == 1){
-                    if(currentWord.checkGuess(splitMessage[1].charAt(0))){
-                        currentWord.guessFound(splitMessage[1].charAt(0));
-                        Main.bot.sendMessage(channel, "Je hebt een letter geraden");
-                        //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
-                        Main.bot.sendMessage(channel, currentWord.getGuessed());
-                        Main.bot.sendMessage(channel, game.getCurrentPlayer() + " het is jou beurt gok een letter of een woord.");
-                    } else if(game.gameLost()){
-                        Main.bot.sendMessage(channel, sender + " je hebt het spel verloren!");
-                        HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
-                        gameSet.remove(game);
-                    }else{
-                        //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
-                        Main.bot.sendMessage(channel, "Er zijn nog " + game.numberOfTurnsLeft() + " pogingen over ");
-                        Main.bot.sendMessage(channel, currentWord.getGuessed());
+                    //check if the character isnt already guessed 
+                    if(!(currentWord.getGuessedLetters().contains(splitMessage[1].charAt(0)))){
+                        //check if the word contains the character
+                        if(currentWord.checkGuess(splitMessage[1].charAt(0))){
+                            //The character is in the word so update the word with the new letter and pass the turn to the next player
+                            currentWord.guessFound(splitMessage[1].charAt(0));
+                            Main.bot.sendMessage(channel, "Je hebt een letter geraden");
+                            //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
+                            Main.bot.sendMessage(channel, currentWord.getGuessed());
+                            Main.bot.sendMessage(channel, game.getCurrentPlayer() + " het is jou beurt gok een letter of een woord.");
+                            
+                            // Check if the game is lost and ifso remove the game
+                        } else if(game.gameLost()){ 
+                            Main.bot.sendMessage(channel, sender + " je hebt het spel verloren!");
+                            HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
+                            gameSet.remove(game);
+                            //if the game is not lost continue
+                        }else{
+                            //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
+                            Main.bot.sendMessage(channel, "Er zijn nog " + game.numberOfTurnsLeft() + " pogingen over ");
+                            Main.bot.sendMessage(channel, currentWord.getGuessed());
+                            Main.bot.sendMessage(channel, game.getCurrentPlayer() + " het is jou beurt gok een letter of een woord.");
+                        }
+                        //The character was guessed so inform the player that this happend and continue
+                    } else {
+                        Main.bot.sendMessage(channel, sender + " deze letter is al geraden!");
                         Main.bot.sendMessage(channel, game.getCurrentPlayer() + " het is jou beurt gok een letter of een woord.");
                     }
+                    //the message contains a word which is guessed check if it is the winning word if so congratulate player and remove the game
                 }else if(currentWord.checkWord(splitMessage[1])){
                     //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
                     Main.bot.sendMessage(channel, sender + " je hebt het spel gewonnen!");
                     gameSet.remove(game);
+                    //if not hte word check if the game is lost if so inform the player and remove the game
                 } else if(game.gameLost()){
                     HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
                     Main.bot.sendMessage(channel, sender + " je hebt het spel verloren!");
                     gameSet.remove(game);
+                    //since the player didnt win or lose continue the game
                 } else {
                     Main.bot.sendMessage(channel, "Er zijn nog " + game.numberOfTurnsLeft() + " pogingen over ");
                     Main.bot.sendMessage(channel, currentWord.getGuessed());
@@ -67,14 +86,20 @@ public class GameManager implements ServerSettings {
     
     public static void startGame(String message, String sender){
         String[] splitMessage = message.split(" ");
-        //Check if it is just the !start command and if so start a game with 1 player
-        if(splitMessage.length == 1){
-            Game game = new Game(0, sender);
-            gameSet.add(game);
-        Main.bot.sendMessage(channel, "Galgje is gestart hier onder staat het woord");
-        Main.bot.sendMessage(channel, game.getCurrentWord().getGuessed());
-        Main.bot.sendMessage(channel, sender + " het is jou beurt gok een letter of een woord.");
-      } 
+        //deze methode werkt nog niet goed want als de speler een spel start die niet aan de beurt is dan lukt het wel
+        Game game = findGameWithPlayer(sender);
+        if((game == null)){
+            //Check if it is just the !start command and if so start a game with 1 player
+            if(splitMessage.length == 1){
+                game = new Game(0, sender);
+                gameSet.add(game);
+                Main.bot.sendMessage(channel, "Galgje is gestart hier onder staat het woord");
+                Main.bot.sendMessage(channel, game.getCurrentWord().getGuessed());
+                Main.bot.sendMessage(channel, sender + " het is jou beurt gok een letter of een woord.");
+            } 
+        } else{
+                Main.bot.sendMessage(channel, sender + " je zit al in een spelletje!");
+        }
       
       //More game modus should be implemented here for example !start [2] shoudl be a 2 player game
     }
@@ -91,7 +116,10 @@ public class GameManager implements ServerSettings {
         return findGame;
     }
     
-    
+    //removes all games so you can have a fresh start
+    public static void resetAllGames(){
+        gameSet.removeAll(gameSet);
+    }
     
     
     

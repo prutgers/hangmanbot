@@ -20,6 +20,7 @@ public final class Word {
     private int wrongGuess = 0;
     private Set<Character> guessedLetters = new HashSet<Character>();
     
+    //When a new word class is made it will generate a word from the woordenlijst.txt
     public Word(){
         toGuess = WordGenerator.kiesRandomWoord(Math.random());
         countGuessed(toGuess);
@@ -43,7 +44,7 @@ public final class Word {
     }
         
     
-    //volgens mij kan deze ook wel private
+    //sets the correct number of * for each letter in the word divided by a space
     private void countGuessed(String toGuess){
         for(int i=0 ; i < toGuess.length() ;i++){
             this.guessed = this.guessed + "* ";
@@ -51,6 +52,7 @@ public final class Word {
         }
     }
     
+    //checks if the guessed word is the winning word
     public boolean checkWord(String guess){
         Boolean goodGuess = false;
         if(guess.equalsIgnoreCase(toGuess)){
@@ -78,6 +80,7 @@ public final class Word {
         return goodGuess;
     }
     
+    //checks if a guess is found and replaces the all the * which are infact the guessed Character
     public void guessFound(char guess){
         String newGuess = "";
         for(int i = 0; i < toGuess.length();i++){
@@ -92,6 +95,7 @@ public final class Word {
         formatGuessedBot(newGuess);
     }
 
+    //Formats the word so the [*] and [letters] are divided by a space
     private void formatGuessedBot(String guess){
         String guessed = "";
         for(int i =0;i<guess.length();i++){

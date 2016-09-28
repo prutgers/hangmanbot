@@ -16,7 +16,8 @@ public class HangmanPrinter implements ServerSettings{
     private HangmanPrinter(){
        
     }
-    
+    //Probably the most ugly method ever written this prints out the state of the Hangman depending on how many wrong guesses you made.
+    //would be nice to implement a difficulty modus
     public static void printHangman(int wrongGuesses){
         String[] hangman; 
         
@@ -103,9 +104,9 @@ public class HangmanPrinter implements ServerSettings{
             hangman = new String[1];
             hangman[0]= "Work in progress";
         }
-        System.out.println("hanglength " + hangman.length + " hangman 0 " + hangman[0]);
+        
         for(int i = hangman.length; i>0;i--){
-            System.out.println("hey " + i);
+            
             Main.bot.sendMessage(channel, " " + hangman[i-1]);
         }
         

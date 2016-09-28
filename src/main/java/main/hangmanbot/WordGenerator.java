@@ -50,7 +50,6 @@ public class WordGenerator {
     }
     //kies een random woord uit de woordenlijst
     public static String kiesRandomWoord(double randomGetal){
-        System.out.println("hallo");
         if(woordenlijst.exists()){
             int randomIndex = (int) (randomGetal * telWoorden());//dit bepaald het random woord, de int die gegenereerd is staat voor het # van het woord in de lijst
             return zoekWoord(randomIndex);
