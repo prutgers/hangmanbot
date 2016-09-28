@@ -22,7 +22,9 @@ public final class Word {
     
     public Word(){
         //dit is nu nog standaard maar moet straks uit een document komen
-        toGuess = "fiets";
+         System.out.println("hallo");
+        toGuess = WordGenerator.kiesRandomWoord(Math.random());
+        System.out.println(toGuess);
         countGuessed(toGuess);
     }    
     

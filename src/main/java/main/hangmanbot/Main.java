@@ -22,5 +22,7 @@ public class Main implements ServerSettings{
             System.out.println("help het gaat mis");
         }
         bot.joinChannel(channel);
+        
+        WordGenerator test = new WordGenerator();
     }
 }
