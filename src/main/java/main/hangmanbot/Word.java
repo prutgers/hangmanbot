@@ -22,7 +22,7 @@ public final class Word {
     
     public Word(){
         //dit is nu nog standaard maar moet straks uit een document komen
-        toGuess = "aandeel";
+        toGuess = "fiets";
         countGuessed(toGuess);
     }    
     
