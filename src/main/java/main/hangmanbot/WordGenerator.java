@@ -16,33 +16,12 @@ import java.util.Scanner;
  * @author Ian en een beetje Peter
  */
 public class WordGenerator {
-     private static File woordenlijst;
+     private final static File woordenlijst = new File("woordenlijst.txt");
 
-    public WordGenerator() {
-        woordenlijst = new File("woordenlijst.txt");
+    private WordGenerator() {
+        
     }
     
-    //tool om een korte woordenlijst te genereren, die alleen woorden heeft van min tot max aantal letters
-    protected static void decreaseList(File file, int min, int max){
-        try(Scanner input = new Scanner(file); FileWriter fw = new FileWriter("woordenlijst.txt");){
-            while(input.hasNextLine()){
-                String woord = input.nextLine();
-                woord = woord.trim();
-                if(woord.matches("\\w{" + min + "," + max + "}")){//als het woord bestaat uit min tot max aantal letters (exclusief letters met speciale tekens, zoals een trema)
-                    System.out.println("Woord gevonden: " + woord);
-                    String newline = String.format("%n");//omdat verschillende OS'en een andere definitie hebben van een newline, dient men deze methode te gebruiken
-                    fw.write(woord + newline);
-                    fw.flush();
-                }
-            }
-        }
-        catch (FileNotFoundException ex) {
-            System.err.println("Bestand niet gevonden: " + ex.getMessage());
-        }
-        catch (IOException ex) {
-            System.err.println("IOException: " + ex.getMessage());
-        }
-    }
     //tel het aantal woorden in de woordenlijst
     private static int telWoorden(){
         int aantalWoorden = 0;

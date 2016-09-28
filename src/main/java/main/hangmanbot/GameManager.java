@@ -33,7 +33,7 @@ public class GameManager implements ServerSettings {
                     if(currentWord.checkGuess(splitMessage[1].charAt(0))){
                         currentWord.guessFound(splitMessage[1].charAt(0));
                         Main.bot.sendMessage(channel, "Je hebt een letter geraden");
-                        HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
+                        //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
                         Main.bot.sendMessage(channel, currentWord.getGuessed());
                         Main.bot.sendMessage(channel, game.getCurrentPlayer() + " het is jou beurt gok een letter of een woord.");
                     } else if(game.gameLost()){
@@ -41,13 +41,13 @@ public class GameManager implements ServerSettings {
                         HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
                         gameSet.remove(game);
                     }else{
-                        HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
+                        //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
                         Main.bot.sendMessage(channel, "Er zijn nog " + game.numberOfTurnsLeft() + " pogingen over ");
                         Main.bot.sendMessage(channel, currentWord.getGuessed());
                         Main.bot.sendMessage(channel, game.getCurrentPlayer() + " het is jou beurt gok een letter of een woord.");
                     }
                 }else if(currentWord.checkWord(splitMessage[1])){
-                    HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
+                    //HangmanPrinter.printHangman(game.getCurrentWord().getWrongGuess());
                     Main.bot.sendMessage(channel, sender + " je hebt het spel gewonnen!");
                     gameSet.remove(game);
                 } else if(game.gameLost()){

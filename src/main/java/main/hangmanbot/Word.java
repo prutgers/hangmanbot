@@ -21,10 +21,7 @@ public final class Word {
     private Set<Character> guessedLetters = new HashSet<Character>();
     
     public Word(){
-        //dit is nu nog standaard maar moet straks uit een document komen
-         System.out.println("hallo");
         toGuess = WordGenerator.kiesRandomWoord(Math.random());
-        System.out.println(toGuess);
         countGuessed(toGuess);
     }    
     

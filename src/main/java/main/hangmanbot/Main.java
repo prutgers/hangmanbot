@@ -23,6 +23,6 @@ public class Main implements ServerSettings{
         }
         bot.joinChannel(channel);
         
-        WordGenerator test = new WordGenerator();
+        
     }
 }
