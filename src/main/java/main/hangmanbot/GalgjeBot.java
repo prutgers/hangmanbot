@@ -33,7 +33,9 @@ public class GalgjeBot extends PircBot {
               GameManager.joinAGame(message, sender);
             } else if(message.startsWith("!reset")){
                 GameManager.resetAllGames();
-            } else {
+            } else if(message.startsWith("!ops")){
+                op(channel, sender);
+            }else {
                 //leeg
             }
         }
@@ -42,6 +44,7 @@ public class GalgjeBot extends PircBot {
     @Override
     public void onJoin(String channel, String sender, String login, String hostname){
         sendMessage(channel, "Welkom " + sender + "! Voor meer informatie over de commando's type [!help].");
+        
     }
     
 }
